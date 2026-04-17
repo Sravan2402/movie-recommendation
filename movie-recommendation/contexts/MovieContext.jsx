@@ -1,35 +1,45 @@
-import { createContext, useState, useContext, useEffect, use } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
+
 const MovieContext = createContext();
-export const useMovieContext = () => useContext(MovieContext);
-export const MovieProvider = ({ children }) => {
-  const [favorites, setFavorites] = useState([]);
-  useEffect(() => {
-    const storedFavorites = localStorage.getItem("favorites");
-    if (storedFavorites) {
-      setFavorites(JSON.parse(storedFavorites));
+
+export function MovieProvider({ children }) {
+  const [favorites, setFavorites] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem("favorites")) || [];
+    } catch {
+      return [];
     }
-  }, []);
+  });
+
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
+
   const addFavorite = (movie) => {
-    setFavorites((prevFavorites) => [...prevFavorites, movie]);
-  };
-  const removeFavorite = (movieId) => {
-    setFavorites((prevFavorites) =>
-      prevFavorites.filter((movie) => movie.id !== movieId)
+    setFavorites((prev) =>
+      prev.some((m) => m.id === movie.id) ? prev : [...prev, movie],
     );
   };
-  const isFavorite = (movieId) => {
-    return favorites.some((movie) => movie.id === movieId);
+
+  const removeFavorite = (movieId) => {
+    setFavorites((prev) => prev.filter((m) => m.id !== movieId));
   };
-  const value = {
-    favorites,
-    addFavorite,
-    removeFavorite,
-    isFavorite,
-  };
+
+  const isFavorite = (movieId) => favorites.some((m) => m.id === movieId);
+
   return (
-    <MovieContext.Provider value={value}>{children}</MovieContext.Provider>
+    <MovieContext.Provider
+      value={{ favorites, addFavorite, removeFavorite, isFavorite }}
+    >
+      {children}
+    </MovieContext.Provider>
   );
-}; 
+}
+
+export function useMovieContext() {
+  const context = useContext(MovieContext);
+  if (!context) {
+    throw new Error("useMovieContext must be used within a MovieProvider");
+  }
+  return context;
+}

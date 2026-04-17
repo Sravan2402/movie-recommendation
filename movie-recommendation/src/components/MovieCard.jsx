@@ -1,8 +1,10 @@
 import "../css/MovieCard.css";
 import { useMovieContext } from "../../contexts/MovieContext";
+
 function MovieCard({ movie }) {
   const { isFavorite, addFavorite, removeFavorite } = useMovieContext();
   const favorite = isFavorite(movie.id);
+
   function onFavoriteClick(e) {
     e.preventDefault();
     if (favorite) {
@@ -11,13 +13,16 @@ function MovieCard({ movie }) {
       addFavorite(movie);
     }
   }
+
+  // FIX E11: guard against null poster_path — avoids broken image URLs
+  const posterSrc = movie.poster_path
+    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+    : "https://via.placeholder.com/500x750?text=No+Image";
+
   return (
     <div className="movie-card">
       <div className="movie-poster">
-        <img
-          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-          alt={movie.title}
-        />
+        <img src={posterSrc} alt={movie.title} />
         <div className="movie-overlay">
           <button
             className={`favorite-btn ${favorite ? "active" : ""}`}

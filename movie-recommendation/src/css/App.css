@@ -1,8 +1,9 @@
+/* App-level layout */
 .main-content {
   flex: 1;
-  padding: 2rem;
-  box-sizing: border-box;
   width: 100%;
-  display: flex;
-  flex-direction: column;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
 }

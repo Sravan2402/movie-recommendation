@@ -1,0 +1,304 @@
+/* ── AdvancedSearch wrapper ──────────────────────────────── */
+.adv-search {
+  padding: 1rem 1rem 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ── Top bar (input + buttons) ───────────────────────────── */
+.adv-search__bar {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.adv-search__input {
+  flex: 1;
+  min-width: 200px;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background-color: #1a1a1a;
+  color: #fff;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.adv-search__input:focus {
+  border-color: #e50914;
+}
+
+.adv-search__filter-btn {
+  position: relative;
+  padding: 0.6rem 1.1rem;
+  background-color: #1a1a1a;
+  color: #ccc;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.adv-search__filter-btn.active,
+.adv-search__filter-btn:hover {
+  border-color: #e50914;
+  color: #fff;
+}
+
+.adv-search__badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #e50914;
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 700;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.adv-search__submit {
+  padding: 0.6rem 1.3rem;
+  background-color: #e50914;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.adv-search__submit:hover:not(:disabled) {
+  background-color: #b0060f;
+}
+
+.adv-search__submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ── Filter panel ────────────────────────────────────────── */
+.adv-search__panel {
+  margin-top: 0.75rem;
+  padding: 1.25rem;
+  background-color: #111;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* ── Fieldset ────────────────────────────────────────────── */
+.adv-field {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+}
+
+.adv-field legend {
+  color: #aaa;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0 0.4rem;
+}
+
+/* ── Genre grid ──────────────────────────────────────────── */
+.adv-genre-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.genre-chip {
+  padding: 0.3rem 0.75rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: #ccc;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.genre-chip:hover {
+  border-color: #e50914;
+  color: #fff;
+}
+
+.genre-chip.selected {
+  background: #e50914;
+  border-color: #e50914;
+  color: #fff;
+}
+
+/* ── Row (rating / year) ─────────────────────────────────── */
+.adv-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.adv-row label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+.adv-row input[type="number"] {
+  width: 80px;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.adv-row input[type="number"]:focus {
+  border-color: #e50914;
+}
+
+.adv-dash {
+  color: #666;
+}
+
+/* ── Person row ──────────────────────────────────────────── */
+.adv-person-row {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.adv-person-row input[type="text"] {
+  flex: 1;
+  padding: 0.45rem 0.75rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+.adv-person-row input[type="text"]:focus {
+  border-color: #e50914;
+}
+
+.adv-resolve-btn {
+  padding: 0.4rem 0.9rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: #ccc;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: all 0.15s;
+}
+
+.adv-resolve-btn:hover {
+  border-color: #e50914;
+  color: #fff;
+}
+
+.adv-resolved {
+  color: #4caf50;
+  font-size: 0.82rem;
+  margin-top: 0.4rem;
+}
+
+.adv-error {
+  color: #e50914;
+  font-size: 0.82rem;
+  margin-top: 0.4rem;
+}
+
+/* ── Sort chips ──────────────────────────────────────────── */
+.adv-sort-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.sort-chip {
+  padding: 0.3rem 0.75rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: #ccc;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.sort-chip:hover {
+  border-color: #e50914;
+  color: #fff;
+}
+
+.sort-chip.selected {
+  background: #e50914;
+  border-color: #e50914;
+  color: #fff;
+}
+
+/* ── Actions bar ─────────────────────────────────────────── */
+.adv-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.adv-reset {
+  padding: 0.5rem 1.1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: transparent;
+  color: #aaa;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.15s;
+}
+
+.adv-reset:hover {
+  border-color: #fff;
+  color: #fff;
+}
+
+.adv-apply {
+  padding: 0.5rem 1.3rem;
+  border-radius: 8px;
+  border: none;
+  background: #e50914;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.adv-apply:hover:not(:disabled) {
+  background: #b0060f;
+}
+
+.adv-apply:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
